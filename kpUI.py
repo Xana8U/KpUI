@@ -1,14 +1,20 @@
 from kivy.app import App
-from kivy.uix.widget import Widget
-from kivy.core.window import Window
+
 from kivy.config import Config
-from kivy.properties import OptionProperty
 # remove red dot on mouse2
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+Config.set('kivy', 'desktop', 1)
+Config.set('graphics', 'resizable', 0)
+Config.set('graphics', 'borderless', 0)
+from kivy.uix.widget import Widget
+from kivy.core.window import Window
+from kivy.properties import OptionProperty
+from kivy.uix.behaviors import focus
 
+Window.on_keyboard(Window.maximize())
 
 class Interface(Widget):
-    Window.size = (800, 500)
+    Window.size = (450, 250)
 
     tab = OptionProperty("normal", options=["normal", "down"])
     q = OptionProperty("normal", options=["normal", "down"])
@@ -33,6 +39,10 @@ class Interface(Widget):
         self.keyboard = Window.request_keyboard(self.keyboard_closed, self)
         self.keyboard.bind(on_key_down=self.on_keyboard_down)
         self.keyboard.bind(on_key_up=self.on_keyboard_up)
+
+    def on_maximize(self):
+        if self.collide_widget(Interface):
+            focus.FocusBehavior.focused()
 
     def keyboard_closed(self):
         self.keyboard.unbind(on_key_down=self.on_keyboard_down)
@@ -108,78 +118,76 @@ class Interface(Widget):
             print("{} was pressed".format(keycode[1]))
             self.spacebar = "down"
             return True
-
-
         else:
             return "error"
 
     def on_keyboard_up(self, keyboard, keycode):
         if keycode[1] == "w":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.w = "normal"
             return True
         elif keycode[1] == "tab":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.tab = "normal"
             return True
         elif keycode[1] == "q":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.q = "normal"
             return True
         elif keycode[1] == "e":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.e = "normal"
             return True
         elif keycode[1] == "r":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.r = "normal"
             return True
         elif keycode[1] == "a":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.a = "normal"
             return True
         elif keycode[1] == "s":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.s = "normal"
             return True
         elif keycode[1] == "d":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.d = "normal"
             return True
         elif keycode[1] == "f":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.f = "normal"
             return True
         elif keycode[1] == "g":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.g = "normal"
             return True
         elif keycode[1] == "shift":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.shift = "normal"
             return True
         elif keycode[1] == "z":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.z = "normal"
             return True
         elif keycode[1] == "x":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.xx = "normal"
             return True
         elif keycode[1] == "c":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.c = "normal"
             return True
         elif keycode[1] == "lctrl":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.lctrl = "normal"
             return True
         elif keycode[1] == "alt":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.alt = "normal"
             return True
         elif keycode[1] == "spacebar":
-            print("{} was pressed".format(keycode[1]))
+            print("{} was released".format(keycode[1]))
             self.spacebar = "normal"
             return True
         else:
